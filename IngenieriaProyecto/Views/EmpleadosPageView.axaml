@@ -1,0 +1,228 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IngenieriaProyecto.ViewModels"
+             xmlns:models="clr-namespace:IngenieriaProyecto.Models"
+             x:DataType="vm:EmpleadosPageViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             FontFamily="{StaticResource PoppinsFont}"
+             x:Class="IngenieriaProyecto.Views.EmpleadosPageView">
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="30">
+            <TextBlock FontSize="20" FontWeight="Bold" Margin="0 20">
+                Lista de Empleados
+            </TextBlock>
+
+            <StackPanel Name="ListasContainer" Spacing="50" Orientation="Horizontal">
+                <StackPanel Name="ListaContainer" Spacing="50">
+                    <StackPanel Spacing="20">
+                        <Border HorizontalAlignment="Left" Padding="15" CornerRadius="8" Name="ListBoxContainer"
+                                Height="500" Width="300" Background="#3c3c3c">
+                            <ListBox ItemsSource="{Binding Empleados}"
+                                     Background="#3c3c3c"
+                                     SelectedItem="{Binding EmpleadoSeleccionado}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type models:EmpleadoModel}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="#DD5746" Padding="20" CornerRadius="40"
+                                                    Margin="0 0 20 0">
+                                                <PathIcon Width="40" Height="40" Data="{StaticResource UsuarioRegular}"
+                                                          Foreground="white" />
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center" Name="MeseroInfo">
+                                                <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="16"
+                                                           Text="{Binding Nombre}" Foreground="white" />
+                                                <TextBlock FontWeight="Light" FontSize="15" Text="{Binding Rol}"
+                                                           Foreground="white" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Spacing="70" HorizontalAlignment="Left">
+                            <Button Background="#90D26D" Width="200" Padding="15 7" HorizontalContentAlignment="Center"
+                                    FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                    Command="{Binding AgregarUsuarioOpenCommand}">
+                                Agregar Empleado
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Name="AgregarEmpleadoContainer" Spacing="20" IsVisible="{Binding IsAgregarEmpleadoVisible}">
+                        <TextBlock FontSize="20" Foreground="white" FontWeight="Bold" Margin="0 30 0 20">Agregar Empleado</TextBlock>
+                        <Border Padding="15" Background="#3c3c3c" CornerRadius="8">
+                           <StackPanel>
+                               <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 35 0 5">
+                                   Nombre del empleado:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" MinHeight="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding NombreEmpleado}" Margin="0 0 0 35"/>
+
+                               <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Nombre de usuario:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" MinHeight="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding UsuarioEmpleado}" Margin="0 0 0 35" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Contraseña:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white" PasswordChar="*"
+                                        Padding="5" Height="24" FontSize="16" Margin="0 0 0 35" Text="{Binding PasswordEmpleado}" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Rol:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" Margin="0 0 0 35" Text="{Binding RolEmpleado}" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Salario:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding SalarioEmpleado}" Margin="0 0 0 35" />
+                               
+                           </StackPanel> 
+                        </Border>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Left">
+                                <Button Background="#8B322C" Width="120" Padding="15 7"
+                                        HorizontalContentAlignment="Center"
+                                        FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                        Command="{Binding AgregarUsuarioCloseCommand}">
+                                    Cancelar
+                                </Button>
+                                <Button Background="#90D26D" Width="120" Padding="15 7"
+                                        HorizontalContentAlignment="Center"
+                                        FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                        Command="{Binding AgregarUsuariosHandlerCommand}">
+                                    Aceptar
+                                </Button>
+                            </StackPanel>
+                            <TextBlock MaxWidth="260" TextWrapping="Wrap" Foreground="{Binding ColorMensajeConfirmacion}" Text="{Binding MensajeConfirmacion}" HorizontalAlignment="Left" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Name="Derecha"  Orientation="Vertical" Spacing="25"
+                            IsVisible="{Binding IsEmpleadoSeleccionado}">
+                    <StackPanel Name="VistaEmpleado" VerticalAlignment="Top" Orientation="Horizontal" Spacing="25">
+                        <Border VerticalAlignment="Top" MaxHeight="160" Background="#DD5746" Padding="40"
+                                CornerRadius="80"
+                                Margin="0 0 20 0">
+                            <PathIcon Width="80" Height="80" Data="{StaticResource UsuarioRegular}" Foreground="white" />
+                        </Border>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top"
+                                    >
+                            <Border Margin="0 0 0 25" CornerRadius="8" BorderBrush="white" Background="#3c3c3c"
+                                    Padding="20" Width="300">
+                                <StackPanel VerticalAlignment="Center" DataContext="{Binding EmpleadoSeleccionado}">
+                                    <TextBlock FontSize="18" Margin="0 0 0 5"
+                                               Text="{Binding Nombre, StringFormat='Nombre: {0}'}" MaxWidth="250"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock FontSize="18" Margin="0 0 0 5" Text="{Binding Rol}" />
+                                    <TextBlock FontSize="18" Margin="0 0 0 5"
+                                               Text="{Binding Salario, StringFormat='Salario: ${0}'}" />
+                                    <TextBlock FontSize="18" Margin="0 0 0 5"
+                                               Text="{Binding Id, StringFormat='ID: {0}'}" />
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Spacing="30">
+                                <Button FontSize="18" Width="70" HorizontalContentAlignment="Center"
+                                        Background="#4793AF"
+                                        Command="{Binding EditarEmpleadoOpenCommand}"
+                                        >
+                                    Editar
+                                </Button>
+                                <Button Background="#8B322C" Width="200" Padding="15 7"
+                                        HorizontalContentAlignment="Center"
+                                        FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                        Command="{Binding EliminarEmpleadoCommand}">
+                                    Eliminar Empleado
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Name="EditarEmpleado" Spacing="20" IsVisible="{Binding IsEditarEmpleadoVisible}">
+                        <TextBlock FontSize="20" Foreground="white" FontWeight="Bold" Margin="0 30 0 20">Editar Empleado</TextBlock>
+                        <Border Padding="15" Background="#3c3c3c" CornerRadius="8">
+                           <StackPanel>
+                               <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 35 0 5">
+                                   Nombre del empleado:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding NombreEdit}" Margin="0 0 0 35" />
+
+                               <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Nombre de usuario:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding UsuarioEdit}" Margin="0 0 0 35" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Contraseña:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" Margin="0 0 0 35" Text="{Binding PasswordEdit}" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Rol:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" Margin="0 0 0 35" Text="{Binding RolEdit}" />
+                               
+                               <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                                      FontSize="18" Foreground="white" Margin="0 0 0 5">
+                                   Salario:
+                               </Label>
+                               <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                        Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                        Text="{Binding SalarioEdit}" Margin="0 0 0 35" />
+                               
+                           </StackPanel> 
+                        </Border>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Left">
+                                <Button Background="#8B322C" Width="120" Padding="15 7"
+                                        HorizontalContentAlignment="Center"
+                                        FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                        Command="{Binding EditarEmpleadoCloseCommand}">
+                                    Cancelar
+                                </Button>
+                                <Button Background="#90D26D" Width="120" Padding="15 7"
+                                        HorizontalContentAlignment="Center"
+                                        FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                        Command="{Binding EditarEmpleadoHandlerCommand}">
+                                    Aceptar
+                                </Button>
+                            </StackPanel>
+                            <TextBlock MaxWidth="260" TextWrapping="Wrap" Foreground="{Binding ColorMensajeConfirmacionEditar}" Text="{Binding MensajeConfirmacionEditar}" HorizontalAlignment="Left" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+    </ScrollViewer>
+</UserControl>

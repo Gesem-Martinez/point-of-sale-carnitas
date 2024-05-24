@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="IngenieriaProyecto/App.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Styles/Iconos.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/DashboardWindowView.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/EmpleadosPageView.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/InicioPageView.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/InventarioPageView.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/MainWindow.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+        <entry key="IngenieriaProyecto/Views/PedidosPageView.axaml" value="IngenieriaProyecto/IngenieriaProyecto.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

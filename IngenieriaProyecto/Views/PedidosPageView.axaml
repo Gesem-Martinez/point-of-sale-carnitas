@@ -1,0 +1,130 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IngenieriaProyecto.ViewModels"
+             xmlns:models="clr-namespace:IngenieriaProyecto.Models"
+             x:DataType="vm:PedidosPageViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="IngenieriaProyecto.Views.PedidosPageView">
+    
+    <UserControl.Styles>
+        <Style Selector="DataGridColumnHeader">
+            <Setter Property="Background" Value="#4d4d4d"/>
+            <Setter Property="Foreground" Value="white"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="30">
+            <TextBlock FontSize="20" FontWeight="Bold" Margin="0 20">
+                Pedidos
+            </TextBlock>
+            <Button Background="#90D26D" Command="{Binding AgregarPedidoCommand}">Realizar nuevo pedido</Button>
+
+
+            <StackPanel Name="AgregarPedidoContainer" Spacing="20" IsVisible="{Binding IsAgregarPedidoVisible}">
+                <TextBlock FontSize="20" Foreground="white" FontWeight="Bold" Margin="0 30 0 20">Realizar Pedido</TextBlock>
+                <Border Padding="15" Background="#3c3c3c" CornerRadius="8">
+                    <StackPanel>
+                        <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                               FontSize="18" Foreground="white" Margin="0 35 0 5">
+                            Cantidad del producto:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                 Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                 Margin="0 0 0 35"
+                                 Text="{Binding NuevaCantidadProducto}"/>
+
+                        <Label HorizontalAlignment="Left" Width="250" FontFamily="{StaticResource PoppinsFont}"
+                               FontSize="18" Foreground="white" Margin="0 0 0 5">
+                            Producto:
+                        </Label>
+                        <ComboBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                  Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}"
+                                  ItemsSource="{Binding ProductosDisponibles}" SelectedItem="{Binding ProductoSeleccionado}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NombreProducto}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        
+
+                        <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                               FontSize="18" Foreground="white" Margin="0 0 0 5">
+                            Precio Unitario:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                 Padding="5" Height="24" FontSize="16" Margin="0 0 0 35"
+                                 Text="{Binding NuevoPrecioUnitario}"
+                                 />
+
+                        <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}"
+                               FontSize="18" Foreground="white" Margin="0 0 0 5">
+                            Precio Total:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white"
+                                 Padding="5" Height="24" FontSize="16" Margin="0 0 0 35" 
+                                 Text="{Binding NuevoPrecioTotal}" IsEnabled="False"/>
+
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Orientation="Vertical" Spacing="5" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Left">
+                        <Button Background="#8B322C" Width="120" Padding="15 7"
+                                HorizontalContentAlignment="Center"
+                                FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                Command="{Binding CancelarPedidoCommand}"
+                                >
+                            Cancelar
+                        </Button>
+                        <Button Background="#90D26D" Width="120" Padding="15 7"
+                                HorizontalContentAlignment="Center"
+                                FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}"
+                                Command="{Binding AceptarPedidoCommand}"
+                                >
+                            Aceptar
+                        </Button>
+                    </StackPanel>
+                    <TextBlock MaxWidth="260" TextWrapping="Wrap" Foreground="{Binding ColorMensajeConfirmacion}"
+                               HorizontalAlignment="Left" FontSize="18" Text="{Binding MensajeConfirmacion}"/>
+                </StackPanel>
+            </StackPanel>
+            
+            
+            
+            
+            
+            <Border Background="#3c3c3c" CornerRadius="8" Padding="10">
+                <ListBox ItemsSource="{Binding Pedidos}" Background="#3c3c3c" Foreground="white">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:PedidoModel}">
+                            <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Margin="10 30">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Background="#4d4d4d">
+                                        <TextBlock Text="{Binding NumeroPedido, StringFormat='Numero de pedido: {0}'}"
+                                                   VerticalAlignment="Center" FontWeight="Bold" Margin="5" />
+                                    </StackPanel>
+                                    <DataGrid Background="#3c3c3c" ItemsSource="{Binding Productos}" AutoGenerateColumns="False" Margin="10">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Cantidad" Binding="{Binding CantidadProducto}"
+                                                                Width="*" />
+                                            <DataGridTextColumn Header="Nombre de Producto"
+                                                                Binding="{Binding NombreProducto}" Width="*" />
+                                            <DataGridTextColumn Header="Precio Unitario"
+                                                                Binding="{Binding PrecioUnitario}" Width="*" />
+                                            <DataGridTextColumn Header="Precio Total" Binding="{Binding PrecioTotal}"
+                                                                Width="*" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

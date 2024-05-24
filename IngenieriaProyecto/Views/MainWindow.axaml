@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:IngenieriaProyecto.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.microsoft.com/markup-compatibility/2006"
+        x:Class="IngenieriaProyecto.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Carnitas Cornejo"
+        Height="972"
+        Width="1389">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel Orientation="Vertical" Spacing="30" Background="#2D2D2D">
+        <StackPanel Name="Header" Orientation="Horizontal" Background="#DD5746">
+            <Image Source="../Assets/icono.png" Width="80" Height="80" VerticalAlignment="Center" Margin="20 20 0 20"></Image>
+            <TextBlock FontSize="40" FontFamily="{StaticResource PoppinsFont}" FontWeight="Bold" VerticalAlignment="Center" Foreground="White" LetterSpacing="0" Margin="20 0 0 0">Carnitas Cornejo</TextBlock>
+        </StackPanel>
+        
+        <TextBlock FontSize="35" Margin="0 20" FontFamily="{StaticResource PoppinsFont}" HorizontalAlignment="Center" FontWeight="Bold" LetterSpacing="2" Foreground="white"> Iniciar Sesion</TextBlock>
+
+        <Border Margin="0" Background="#3C3C3C" Width="400" BorderThickness="1" Padding="40 " CornerRadius="16">
+            <StackPanel>
+                <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}" FontSize="18" Foreground="white" Margin="0 0 0 5">Nombre de Usuario:</Label>
+                <TextBox HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white" Padding="5" Height="24" FontSize="16" FontFamily="{StaticResource PoppinsFont}" Text="{Binding NombreUsuario}" Margin="0 0 0 30"/>
+
+                <Label HorizontalAlignment="Left" Width="200" FontFamily="{StaticResource PoppinsFont}" FontSize="18" Foreground="white" Margin="0 20 0 5">Contraseña:</Label>
+                <TextBox PasswordChar="*" HorizontalAlignment="Left" Width="300" CornerRadius="8" Background="white" Padding="5" Height="24" FontSize="16" Text="{Binding PassUsuario}" Margin="0 0 0 30"/>
+            </StackPanel>
+        </Border>
+        
+        <StackPanel Orientation="Horizontal" Spacing="70" HorizontalAlignment="Center">
+            <Button Command="{Binding Salir_OnClick}" Background="#8B322C" Width="150" Padding="15 7" HorizontalContentAlignment="Center" FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}">Salir</Button>
+            <Button Command="{Binding Login_OnClickCommand}" Background="#90D26D" Width="150" Padding="15 7" HorizontalContentAlignment="Center" FontSize="18" Foreground="white" FontFamily="{StaticResource PoppinsFont}">Ingresar</Button>
+        </StackPanel>
+        <TextBlock Text="{Binding ErrorMensaje}" Foreground="Red" FontSize="13" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>
